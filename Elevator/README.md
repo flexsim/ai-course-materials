@@ -21,6 +21,7 @@ All observations are found in the Parameter Table called Observations.
 * **TotalInElevator** - The total number of people currently in the elevator cabin.
 * **TotalAngry** - The total number of people currently in the system who crossed the anger threshold, either in line or in the cabin.
 * **RidesCompleted** - The number of people who have exited the cabin since the previous action.
+* **ModelTime** - The number of seconds that have elapsed in the simulation
 
 ### Per-floor Observations
 The following observations are each an array with one value per floor.
