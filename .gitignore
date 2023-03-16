@@ -1,0 +1,4 @@
+*__pycache__*
+PickingModel/best_models/*
+PickingModel/tensorboard/
+*_autosave.fsm
