@@ -221,7 +221,7 @@ class NumpyEncoder(json.JSONEncoder):
 def main():
 
     env = FSEE()
-    check_env(env)
+    # check_env(env)
 
     for i in range(2):
         env.seed(i)
