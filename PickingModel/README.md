@@ -1,3 +1,5 @@
+> Attention Students: Use **PickingModel.fsm** to complete your assignment.
+
 # Description
 
 This model uses the Reinforcement Learning tool to choose actions for a picker in a warehouse.
@@ -64,3 +66,13 @@ This is a form of penalty, as this time cannot be used to gain reward.
 Shaping your reward function requires some positive reward. Any other reward choice,
 such as giving a negative reward, exiting early, or consuming clock time, is left
 to your best judgement.
+
+# Notes for Maintainers
+
+To make changes to this model:
+1. Open PickingModel.fsx.
+2. Make the desired changes.
+3. Restore the workspace to something reasonable.
+4. Save the model.
+5. Save as PickingModel.fsm.
+6. Commit and push changes to all xml/*.fsx files and to PickingModel.fsm
