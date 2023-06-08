@@ -2,3 +2,7 @@
 PickingModel/best_models/*
 PickingModel/tensorboard/
 *_autosave.fsm
+/PickingModel/xml/Workspace.fsx
+PickingModel/*.zip
+PickingModel/*.sqlite
+PickingModel/best_models/*

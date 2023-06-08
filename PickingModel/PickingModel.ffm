@@ -527,4 +527,5 @@
     <map-node path="Tools/FlowItemBin/Man/Man&gt;variables/breakto" file="xml/Tools_FlowItemBin_Man_Man_variables_breakto.fsx" file-map-method="single-node"/>
     <map-node path="Tools/FlowItemBin/Tote/Tote&gt;behaviour/eventfunctions/OnReceive" file="xml/Tools_FlowItemBin_Tote_Tote_behaviour_eventfunctions_OnReceive.fsx" file-map-method="single-node"/>
     <map-node path="Tools/FlowItemBin/Pallet/Pallet&gt;behaviour/eventfunctions/OnReceive" file="xml/Tools_FlowItemBin_Pallet_Pallet_behaviour_eventfunctions_OnReceive.fsx" file-map-method="single-node"/>
+    <map-node path="Tools/Workspace" file="xml/Workspace.fsx" file-map-method="single-node"/>
 </flexsim-file-map>

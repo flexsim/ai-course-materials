@@ -35,4 +35,9 @@ for (int i = 1; i &lt;= codeNodes.length; i++) {
 	mapNode.attrs.set("file-map-method", "single-node");
 }
 
+var wsNode = root.createElement("map-node");
+wsNode.attrs.path = "Tools/Workspace";
+wsNode.attrs.file = "xml/Workspace.fsx";
+wsNode.attrs.set("file-map-method", "single-node");
+
 doc.saveAs(modeldir() + "PickingModel.ffm");</data></node></flexsim-tree>
