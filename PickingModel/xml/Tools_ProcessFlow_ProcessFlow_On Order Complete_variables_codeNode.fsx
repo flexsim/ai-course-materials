@@ -7,7 +7,7 @@ Token token = param(3);
 treenode processFlow = ownerobject(activity);
 
 double orderDuration = Model.time - token.OrderStartTime;
-double orderDistance = Model.time - token.OrderStartDistance;
+double orderDistance = token.Operator.stats.totalTravelDistance - token.OrderStartDistance;
 int totalItems = token.OrderSize;
 
 int priorityItems = 0;
