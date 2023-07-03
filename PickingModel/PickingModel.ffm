@@ -224,7 +224,7 @@
     <map-node path="Tools/ProcessFlow/ProcessFlow/Get AisleObj~3&gt;variables/onIdleTimerFired" file="xml/Tools_ProcessFlow_ProcessFlow_Get AisleObj~3_variables_onIdleTimerFired.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Get AisleObj~3&gt;variables/startIdle" file="xml/Tools_ProcessFlow_ProcessFlow_Get AisleObj~3_variables_startIdle.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Get AisleObj~3&gt;variables/partitionID" file="xml/Tools_ProcessFlow_ProcessFlow_Get AisleObj~3_variables_partitionID.fsx" file-map-method="single-node"/>
-    <map-node path="Tools/ProcessFlow/ProcessFlow/More to pick?~2&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_More to pick?~2_variables_decision.fsx" file-map-method="single-node"/>
+    <map-node path="Tools/ProcessFlow/ProcessFlow/More to pick?~2&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_More to pick_~2_variables_decision.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Get AisleObj~2&gt;variables/onWaitTimerFired" file="xml/Tools_ProcessFlow_ProcessFlow_Get AisleObj~2_variables_onWaitTimerFired.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Get AisleObj~2&gt;variables/onIdleTimerFired" file="xml/Tools_ProcessFlow_ProcessFlow_Get AisleObj~2_variables_onIdleTimerFired.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Get AisleObj~2&gt;variables/startIdle" file="xml/Tools_ProcessFlow_ProcessFlow_Get AisleObj~2_variables_startIdle.fsx" file-map-method="single-node"/>
@@ -232,10 +232,10 @@
     <map-node path="Tools/ProcessFlow/ProcessFlow/More Capacity~2&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_More Capacity~2_variables_decision.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/On Order Complete&gt;variables/codeNode" file="xml/Tools_ProcessFlow_ProcessFlow_On Order Complete_variables_codeNode.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/On Unload Error&gt;variables/codeNode" file="xml/Tools_ProcessFlow_ProcessFlow_On Unload Error_variables_codeNode.fsx" file-map-method="single-node"/>
-    <map-node path="Tools/ProcessFlow/ProcessFlow/More to pick?&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_More to pick?_variables_decision.fsx" file-map-method="single-node"/>
+    <map-node path="Tools/ProcessFlow/ProcessFlow/More to pick?&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_More to pick__variables_decision.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Reset AisleObj&gt;labels/1/2" file="xml/Tools_ProcessFlow_ProcessFlow_Reset AisleObj_labels_1_2.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/On Double Aisle Error&gt;variables/codeNode" file="xml/Tools_ProcessFlow_ProcessFlow_On Double Aisle Error_variables_codeNode.fsx" file-map-method="single-node"/>
-    <map-node path="Tools/ProcessFlow/ProcessFlow/Aisle Valid?&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_Aisle Valid?_variables_decision.fsx" file-map-method="single-node"/>
+    <map-node path="Tools/ProcessFlow/ProcessFlow/Aisle Valid?&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_Aisle Valid__variables_decision.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Get AisleObj&gt;variables/onWaitTimerFired" file="xml/Tools_ProcessFlow_ProcessFlow_Get AisleObj_variables_onWaitTimerFired.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Get AisleObj&gt;variables/onIdleTimerFired" file="xml/Tools_ProcessFlow_ProcessFlow_Get AisleObj_variables_onIdleTimerFired.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Get AisleObj&gt;variables/startIdle" file="xml/Tools_ProcessFlow_ProcessFlow_Get AisleObj_variables_startIdle.fsx" file-map-method="single-node"/>
@@ -248,10 +248,10 @@
     <map-node path="Tools/ProcessFlow/ProcessFlow/Pick Items&gt;variables/quantity" file="xml/Tools_ProcessFlow_ProcessFlow_Pick Items_variables_quantity.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/More Capacity&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_More Capacity_variables_decision.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Error Delay&gt;variables/delayTimeNode" file="xml/Tools_ProcessFlow_ProcessFlow_Error Delay_variables_delayTimeNode.fsx" file-map-method="single-node"/>
-    <map-node path="Tools/ProcessFlow/ProcessFlow/Manual Mode?&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_Manual Mode?_variables_decision.fsx" file-map-method="single-node"/>
+    <map-node path="Tools/ProcessFlow/ProcessFlow/Manual Mode?&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_Manual Mode__variables_decision.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Update Observations&gt;variables/codeNode" file="xml/Tools_ProcessFlow_ProcessFlow_Update Observations_variables_codeNode.fsx" file-map-method="single-node"/>
-    <map-node path="Tools/ProcessFlow/ProcessFlow/Operator has items?&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_Operator has items?_variables_decision.fsx" file-map-method="single-node"/>
-    <map-node path="Tools/ProcessFlow/ProcessFlow/Keep Picking or Unload?&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_Keep Picking or Unload?_variables_decision.fsx" file-map-method="single-node"/>
+    <map-node path="Tools/ProcessFlow/ProcessFlow/Operator has items?&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_Operator has items__variables_decision.fsx" file-map-method="single-node"/>
+    <map-node path="Tools/ProcessFlow/ProcessFlow/Keep Picking or Unload?&gt;variables/decision" file="xml/Tools_ProcessFlow_ProcessFlow_Keep Picking or Unload__variables_decision.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Get Aisle&gt;labels/1/2" file="xml/Tools_ProcessFlow_ProcessFlow_Get Aisle_labels_1_2.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Push to List&gt;variables/onWaitTimerFired" file="xml/Tools_ProcessFlow_ProcessFlow_Push to List_variables_onWaitTimerFired.fsx" file-map-method="single-node"/>
     <map-node path="Tools/ProcessFlow/ProcessFlow/Get Partition, Value&gt;variables/codeNode" file="xml/Tools_ProcessFlow_ProcessFlow_Get Partition, Value_variables_codeNode.fsx" file-map-method="single-node"/>
