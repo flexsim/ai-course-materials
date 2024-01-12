@@ -2,6 +2,19 @@
 
 This project trains an AI to place boxes in the correct queue. Its purpose is to make sure your environment is correct.
 
+## Installing Software
+1. Install [FlexSim](account.flexsim.com/downloads) version 2024 or later
+1. Install [python](https://www.python.org/downloads/release/python-3117/) version 3.11. The link is at the bottom of the page.
+    * Be sure to add python.exe to your path
+1. Install [Visual Studio Code](https://code.visualstudio.com/)
+1. Launch Visual Studio Code. Choose `File->Open Folder...` and choose the `HelloWorld` folder.
+    1. Open the Extensions window: `View->Extensions`
+    1. Search for and install the **Tensorboard** extension from Microsoft.
+    1. Open the command palette: `View->Command Pallete...`
+    1. In the Command Palette, type `Python: Select Interpreter` and choose that option. Then choose the python version you just installed.
+    1. Open a new terminal: `Terminal->New Terminal`
+    1. Run this command: `pip install stable-baselines3[extra]`
+
 ## Run the FlexSim Model
 
 The FlexSim model is a simulator for a mini factory. Its purpose is to behave as the real system would behave, whether the decisions are good or bad.
