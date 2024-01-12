@@ -6,3 +6,5 @@ PickingModel/tensorboard/
 PickingModel/*.zip
 PickingModel/*.sqlite
 PickingModel/best_models/*
+HelloWorld/tensorboard
+HelloWorld/*.zip
