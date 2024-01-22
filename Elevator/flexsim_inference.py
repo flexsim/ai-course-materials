@@ -41,7 +41,7 @@ class FlexSimInferenceServer(BaseHTTPRequestHandler):
             if floor == 0:
                 mask[1] = False
 
-            is_max_capacity = observation['TotalOnElevator'] >= 20
+            is_max_capacity = observation['TotalInElevator'] >= 20
             getting_off = observation['DisembarkCount'][floor]
             getting_on = observation['EmbarkCount'][floor]
             if getting_off > 0 or (not is_max_capacity and getting_on > 0):
