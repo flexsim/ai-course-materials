@@ -32,7 +32,7 @@ class FlexSimInferenceServer(BaseHTTPRequestHandler):
 
             observation = {k: self._ensure_nparray(v) for k, v in raw_observation.items()}
 
-            mask = [True, True, True]
+            mask = [True, True, False]
             max_floor = FlexSimInferenceServer.model.observation_space.spaces['Floor'].n - 1
             floor = observation['Floor']
             if floor == max_floor:
@@ -41,10 +41,11 @@ class FlexSimInferenceServer(BaseHTTPRequestHandler):
             if floor == 0:
                 mask[1] = False
 
-            in_elevator = observation['DisembarkCount'][floor]
-            on_floor = observation['EmbarkCount'][floor]
-            if in_elevator == 0 and on_floor == 0:
-                mask[2] = False
+            is_max_capacity = observation['TotalOnElevator'] >= 20
+            getting_off = observation['DisembarkCount'][floor]
+            getting_on = observation['EmbarkCount'][floor]
+            if getting_off > 0 or (not is_max_capacity and getting_on > 0):
+                mask[2] = True
 
             action, _states = FlexSimInferenceServer.model.predict(observation, action_masks=mask)
             self.send_response(200)

@@ -18,7 +18,7 @@ def main():
     env = FlexSimEnv(
         flexsimPath = paths.flexsim,
         modelPath = paths.model,
-        verbose = True,
+        verbose = False,
         visible = False
         )
     

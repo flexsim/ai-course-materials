@@ -3,7 +3,7 @@ import os
 flexsim = os.path.abspath("C:/Program Files/FlexSim 2024/program/flexsim.exe")
 model = os.path.join(os.path.dirname(__file__), "Elevator.fsm")
 tensorboard = os.path.join(os.path.dirname(__file__), "tensorboard")
-agent = os.path.join(os.path.dirname(__file__), "HelloWorld.zip")
+agent = os.path.join(os.path.dirname(__file__), "Elevator.zip")
 
 if __name__=="__main__":
     print("FlexSim path:", flexsim)

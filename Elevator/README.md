@@ -73,3 +73,16 @@ settings, do not expect the trained AI to be competent with the new settings.
 * **MaxRideTime** - If someone waits on the elevator for longer than this amount of time, they count in the DisembarkAngryCount observation for that floor, and in the TotalAngry observation.
 * **MaxRidersInSystem** - More people will not be generated unless the total number of people currently in the simulation is less than this value.
 * **DoAnimations** - If set to Yes, people will be drawn with detailed human shapes. If set to No, people will be drawn as rectangular prisms and cylinders. Yes looks more realistic but requires more resources. No is recommended for training.
+
+## Instructions
+
+> Note: this model uses the sb3-contrib package. Run `pip install sb3-contrib` to install.
+
+### Choose and Observation Space
+There is a Global Table called SpaceInfo. Edit the **Max** and **Used** columns
+
+* If you want to include an observation, set **Used** to **1**. To ignore the observation, set **Used** to **0**
+* To tune the signal strength, change the **Max** value
+
+### Shape your reward function
+There are two user commands: **onPersonEnter** and **onPersonExit**. Edit the code in these commands to update the reward function.
