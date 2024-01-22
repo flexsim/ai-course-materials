@@ -4,8 +4,11 @@ This project trains an AI to place boxes in the correct queue. Its purpose is to
 
 ## Installing Software
 1. Install [FlexSim](account.flexsim.com/downloads) version 2024 or later
+    * Activate a license. RL requires an active license.
 1. Install [python](https://www.python.org/downloads/release/python-3117/) version 3.11. The link is at the bottom of the page.
-    * Be sure to add python.exe to your path
+    * Make sure the box to add python.exe to your path is checked
+    * Make sure the box to install pip is checked
+    * Verify your python version in a command prompt: `python --version`
 1. Install [Visual Studio Code](https://code.visualstudio.com/)
 1. Launch Visual Studio Code. Choose `File->Open Folder...` and choose the `HelloWorld` folder.
     1. Open the Extensions window: `View->Extensions`
