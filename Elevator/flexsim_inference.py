@@ -1,5 +1,5 @@
 import json
-from stable_baselines3 import PPO
+from sb3_contrib import MaskablePPO
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 import numpy as np
@@ -17,18 +17,36 @@ class FlexSimInferenceServer(BaseHTTPRequestHandler):
         params = parse_qs(body)
         self._handle_reply(params)
 
+    def _ensure_nparray(self, v):
+        if isinstance(v, list):
+            return np.array(v)
+        return v
+
     def _handle_reply(self, params):
         if len(params):
-            observation = []
+            raw_observation = {}
             if b'observation' in params.keys():
                 observationBytes = params[b'observation'][0]
-                observation = np.array(json.loads(observationBytes))
-            elif 'observation' in params.keys():
-                observationBytes = params['observation'][0]
-                observation = np.array(json.loads(observationBytes))
-            if isinstance(observation, list):
-                observation = np.array(observation)
-            action, _states = FlexSimInferenceServer.model.predict(observation)
+                rawBytes = json.loads(observationBytes)
+                raw_observation = json.loads(rawBytes)
+
+            observation = {k: self._ensure_nparray(v) for k, v in raw_observation.items()}
+
+            mask = [True, True, True]
+            max_floor = FlexSimInferenceServer.model.observation_space.spaces['Floor'].n - 1
+            floor = observation['Floor']
+            if floor == max_floor:
+                mask[0] = False
+            
+            if floor == 0:
+                mask[1] = False
+
+            in_elevator = observation['DisembarkCount'][floor]
+            on_floor = observation['EmbarkCount'][floor]
+            if in_elevator == 0 and on_floor == 0:
+                mask[2] = False
+
+            action, _states = FlexSimInferenceServer.model.predict(observation, action_masks=mask)
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
@@ -55,9 +73,9 @@ class NumpyEncoder(json.JSONEncoder):
 
 def main():
     print("Loading model...")
-    model = PPO.load(paths.agent)
+    model = MaskablePPO.load(paths.agent)
     FlexSimInferenceServer.model = model
-    
+   
     # Create server object
     print("Starting server...")
     hostName = "localhost"

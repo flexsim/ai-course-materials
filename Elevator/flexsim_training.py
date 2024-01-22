@@ -38,12 +38,14 @@ def main():
     for i in range(2):
         env.seed(i)
         observation, info = env.reset()
+        mask = mask_fn(env)
         env.render()
         done = False
         rewards = []
         while not done:
-            action, _states = model.predict(observation)
+            action, _states = model.predict(observation, action_masks=mask)
             observation, reward, done, truncated, _ = env.step(action)
+            mask = mask_fn(env)
             env.render()
             rewards.append(reward)
             if done:
