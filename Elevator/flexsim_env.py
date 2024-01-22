@@ -23,25 +23,33 @@ class FlexSimEnv(gymnasium.Env):
         self.action_space = self._get_action_space()
         self.observation_space = self._get_observation_space()
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         self.seedNum = seed
         self._reset_flexsim()
         state, reward, done = self._get_observation()
         info = {}
         return state, info
     
-    def action_mask(self):
+    def valid_action_mask(self):
         msg = "GetParam:ActionMask?"
         if self.verbose:
-            print("sending", msg)
+            print("getting action mask")
         self._socket_send(msg.encode())
 
         paramBytes = self._socket_recv()
-        param = json.loads(paramBytes)
+        mask = json.loads(paramBytes)
 
-        return np.array(param)
+        mask = [bool(m) for m in mask]
+        
+        if self.verbose:
+            print("got", mask)
+
+        return mask
     
     def step(self, action):
+        if self.verbose:
+            print("action", action)
+
         self._take_action(action)
         state, reward, done = self._get_observation()
         truncated = False
@@ -118,6 +126,9 @@ class FlexSimEnv(gymnasium.Env):
         self.lastObservation = observationBytes.decode('utf-8')
         state, reward, done = self._convert_to_observation(observationBytes)
 
+        if self.verbose:
+            print("observation", state)
+
         return state, reward, done
     
     def _take_action(self, action):
@@ -187,7 +198,7 @@ class FlexSimEnv(gymnasium.Env):
 
         raise RuntimeError("Could not parse gym space string")
     
-    def _ensure_nparray(v):
+    def _ensure_nparray(self, v):
         if isinstance(v, list):
             return np.array(v)
         return v
@@ -195,7 +206,7 @@ class FlexSimEnv(gymnasium.Env):
     def _convert_to_observation(self, spaceBytes):
         observation = json.loads(spaceBytes)
         raw_state = json.loads(observation["state"])
-        state = {k: lambda v: self._ensure_nparray(v) for k, v in raw_state.items()}
+        state = {k: self._ensure_nparray(v) for k, v in raw_state.items()}
         if isinstance(state, list):
             state = np.array(observation["state"])
         reward = observation["reward"]
@@ -230,9 +241,9 @@ def main():
         done = False
         rewards = []
         while not done:
-            mask = env.action_mask()
+            mask = env.valid_action_mask()
             action = env.action_space.sample()
-            while mask[action] == 0:
+            while not mask[action]:
                 action = env.action_space.sample()
 
             observation, reward, done, truncated, info = env.step(action)

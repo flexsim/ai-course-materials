@@ -1,9 +1,15 @@
 import gymnasium as gym
 from flexsim_env import FlexSimEnv
-from stable_baselines3.common.env_checker import check_env
 from sb3_contrib import MaskablePPO
-from stable_baselines3.common.env_util import make_vec_env
+from sb3_contrib.common.wrappers import ActionMasker
 import paths
+
+
+def mask_fn(env: gym.Env) -> list[bool]:
+    # Do whatever you'd like in this function to return the action mask
+    # for the current env. In this example, we assume the env has a
+    # helpful method we can rely on.
+    return env.valid_action_mask()
 
 def main():
     print("Initializing FlexSim environment...")
@@ -15,10 +21,10 @@ def main():
         verbose = True,
         visible = False
         )
-    check_env(env) # Check that an environment follows Gym API.
-
+    
     # Training a baselines3 PPO model in the environment
-    model = MaskablePPO("MlpPolicy", env, verbose=1, tensorboard_log=paths.tensorboard)
+    env = ActionMasker(env, mask_fn)
+    model = MaskablePPO("MultiInputPolicy", env, verbose=1, tensorboard_log=paths.tensorboard)
     print("Training model...")
     model.learn(total_timesteps=1000)
     

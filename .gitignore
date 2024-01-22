@@ -1,10 +1,10 @@
 *__pycache__*
-PickingModel/best_models/*
-PickingModel/tensorboard/
+*.zip
+*/tensorboard/*
+*.sqlite
 *_autosave.fsm
+*/best_models/*
 /PickingModel/xml/Workspace.fsx
-PickingModel/*.zip
-PickingModel/*.sqlite
-PickingModel/best_models/*
-HelloWorld/tensorboard
-HelloWorld/*.zip
+
+
+
