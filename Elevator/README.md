@@ -86,3 +86,14 @@ There is a Global Table called SpaceInfo. Edit the **Max** and **Used** columns
 
 ### Shape your reward function
 There are two user commands: **onPersonEnter** and **onPersonExit**. Edit the code in these commands to update the reward function.
+
+### Pre-Training Checklist
+- [ ] Choose which observations to include.
+- [ ] Modify onPersonEnter.
+- [ ] Modify onPersonExit.
+- [ ] Reset the model - Resetting the model applies your observation choices.
+- [ ] Save the model.
+- [ ] Close FlexSim.
+- [ ] Run flexsim_env.py. Verify the observation space matches and that you get non-zero reward.
+- [ ] In flexsim_training.py, set the total number of time steps for training.
+- [ ] Run flexsim_training.py.
