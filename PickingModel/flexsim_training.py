@@ -1,47 +1,48 @@
-import gym
-from flexsim_env import FSEE
+import gymnasium as gym
+from flexsim_env import FlexSimEnv
 from stable_baselines3 import PPO
-from stable_baselines3.common.env_util import make_vec_env
-from stable_baselines3.common.callbacks import EvalCallback
+import paths
 
 def main():
     print("Initializing FlexSim environment...")
 
     # Create a FlexSim OpenAI Gym Environment
-    env = FSEE()
-   
+    env = FlexSimEnv(
+        flexsimPath = paths.flexsim,
+        modelPath = paths.model,
+        verbose = False,
+        visible = False
+        )
+
     # Training a baselines3 PPO model in the environment
-    model = PPO("MlpPolicy", env, verbose=1, tensorboard_log="./tensorboard/")
+    model = PPO("MlpPolicy", env, verbose=1, tensorboard_log=paths.tensorboard)
     print("Training model...")
-
-    # add an evalCallback, which will save the model from time to time
-    evalCallback = EvalCallback(env, best_model_save_path="./best_models/", eval_freq=10000)
-
-    model.learn(total_timesteps=100000, callback=evalCallback)
+    model.learn(total_timesteps=100000)
     
     # save the model
     print("Saving model...")
-    model.save("MyTrainedModel")
+    model.save(paths.agent)
+
+    input("Waiting for input to do some test runs...")
 
     # Run test episodes using the trained model
-    # input("Waiting for input to do some test runs...")
-    # for i in range(2):
-    #     env.seed(i)
-    #     observation = env.reset()
-    #     env.render()
-    #     done = False
-    #     rewards = []
-    #     while not done:
-    #         action, _states = model.predict(observation)
-    #         observation, reward, done, info = env.step(action)
-    #         env.render()
-    #         rewards.append(reward)
-    #         if done:
-    #             cumulative_reward = sum(rewards)
-    #             print("Reward: ", cumulative_reward, "\n")
-    # env._release_flexsim()
-    # input("Waiting for input to close FlexSim...")
-    # env.close()
+    for i in range(2):
+        env.seed(i)
+        observation, info = env.reset()
+        env.render()
+        done = False
+        rewards = []
+        while not done:
+            action, _states = model.predict(observation)
+            observation, reward, done, truncated, _ = env.step(action)
+            env.render()
+            rewards.append(reward)
+            if done:
+                cumulative_reward = sum(rewards)
+                print("Reward: ", cumulative_reward, "\n")
+    env._release_flexsim()
+    input("Waiting for input to close FlexSim...")
+    env.close()
 
 
 if __name__ == "__main__":

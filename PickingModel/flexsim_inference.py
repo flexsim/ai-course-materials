@@ -3,6 +3,7 @@ from stable_baselines3 import PPO
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 import numpy as np
+import paths
 
 class FlexSimInferenceServer(BaseHTTPRequestHandler):
 
@@ -31,7 +32,8 @@ class FlexSimInferenceServer(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write(bytes(json.dumps(action, cls=NumpyEncoder), "utf-8"))
+            body = json.dumps(action, cls=NumpyEncoder)
+            self.wfile.write(bytes(body, "utf-8"))
             return
       
         self.send_response(200)
@@ -53,7 +55,7 @@ class NumpyEncoder(json.JSONEncoder):
 
 def main():
     print("Loading model...")
-    model = PPO.load("MyTrainedModel")
+    model = PPO.load(paths.agent)
     FlexSimInferenceServer.model = model
     
     # Create server object

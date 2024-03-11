@@ -1,47 +1,41 @@
-import gym
-import os
+import gymnasium
 import subprocess
 import socket
 import json
-from gym import error, spaces, utils
-from gym.utils import seeding
 import numpy as np
-from stable_baselines3.common.env_checker import check_env
+import paths
 
-class FSEE(gym.Env):
+class FlexSimEnv(gymnasium.Env):
     metadata = {'render.modes': ['human', 'rgb_array', 'ansi']}
-    cur_port = 5005
 
-    def __init__(self):
-        self.flexsimPath = "C:/Program Files/FlexSim 2023/program/flexsim.exe"
-        self.modelPath = "./PickingModel.fsm"
-        self.address = 'localhost'
-        self.port = FSEE.cur_port
-        self.verbose = True
-        self.visible = True
-        FSEE.cur_port += 1
+    def __init__(self, flexsimPath, modelPath, address='localhost', port=5005, verbose=False, visible=False):
+        self.flexsimPath = flexsimPath
+        self.modelPath = modelPath
+        self.address = address
+        self.port = port
+        self.verbose = verbose
+        self.visible = visible
 
         self.lastObservation = ""
 
         self._launch_flexsim()
-        self.flexsim_open = True
-        self.flexsim_waiting = True
         
         self.action_space = self._get_action_space()
         self.observation_space = self._get_observation_space()
 
-       
-
-    def reset(self):
+    def reset(self, seed=None):
+        self.seedNum = seed
         self._reset_flexsim()
         state, reward, done = self._get_observation()
-        return state
-
+        info = {}
+        return state, info
+    
     def step(self, action):
         self._take_action(action)
         state, reward, done = self._get_observation()
+        truncated = False
         info = {}
-        return state, reward, done, info
+        return state, reward, done, truncated, info
 
     def render(self, mode='human'):
         if mode == 'rgb_array':
@@ -51,7 +45,7 @@ class FSEE(gym.Env):
         elif mode == 'ansi':
             return self.lastObservation
         else:
-            super(FSEE, self).render(mode=mode)
+            super(FlexSimEnv, self).render(mode=mode)
 
     def close(self):
         self._close_flexsim()
@@ -60,13 +54,6 @@ class FSEE(gym.Env):
         self.seedNum = seed
         return self.seedNum
 
-    def __del__(self):
-        if self.flexsim_waiting:
-             self._release_flexsim()
-
-        if self.flexsim_open:
-            self._close_flexsim()
-    
     def _launch_flexsim(self):
         if self.verbose:
             print("Launching " + self.flexsimPath + " " + self.modelPath)
@@ -81,13 +68,11 @@ class FSEE(gym.Env):
     
     def _close_flexsim(self):
         self.flexsimProcess.kill()
-        self.flexsim_open = False
 
     def _release_flexsim(self):
         if self.verbose:
             print("Sending StopWaiting message")
         self._socket_send(b"StopWaiting?")
-        self.flexsim_waiting = False
 
     def _get_action_space(self):
         self._socket_send(b"ActionSpace?")
@@ -110,7 +95,7 @@ class FSEE(gym.Env):
         low = [-1] * count
         high = [1] * count
 
-        return gym.spaces.Box(low=np.array(low), high=np.array(high))
+        return gymnasium.spaces.Box(low=np.array(low), high=np.array(high))
 
     def _reset_flexsim(self):
         if self.verbose:
@@ -187,13 +172,13 @@ class FSEE(gym.Env):
         params = json.loads(spaceBytes[paramsStartIndex+1:paramsEndIndex])
         
         if type == b'Discrete':
-            return gym.spaces.Discrete(params)
+            return gymnasium.spaces.Discrete(params)
         elif type == b'Box':
-            return gym.spaces.Box(params)
+            return gymnasium.spaces.Box(np.array(params[0]), np.array(params[1]), dtype=np.int32)
         elif type == b'MultiDiscrete':
-            return gym.spaces.MultiDiscrete(params)
+            return gymnasium.spaces.MultiDiscrete(params)
         elif type == b'MultiBinary':
-            return gym.spaces.MultiBinary(params)
+            return gymnasium.spaces.MultiBinary(params)
 
         raise RuntimeError("Could not parse gym space string")
 
@@ -220,8 +205,12 @@ class NumpyEncoder(json.JSONEncoder):
 
 def main():
 
-    env = FSEE()
-    # check_env(env)
+    env = FlexSimEnv(
+        flexsimPath = paths.flexsim,
+        modelPath = paths.model,
+        verbose = True,
+        visible = True
+        )
 
     for i in range(2):
         env.seed(i)
@@ -231,7 +220,7 @@ def main():
         rewards = []
         while not done:
             action = env.action_space.sample()
-            observation, reward, done, info = env.step(action)
+            observation, reward, done, truncated, info = env.step(action)
             env.render()
             rewards.append(reward)
             if done:
